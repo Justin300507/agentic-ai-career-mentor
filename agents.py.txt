@@ -1,0 +1,132 @@
+# agents.py
+
+# -------------------------------
+# Resume Analyzer Agent
+# -------------------------------
+def resume_analyzer(resume_text):
+    """
+    Extracts skills, interest, education, and experience
+    from resume text.
+    """
+
+    profile = {
+        "skills": [],
+        "interest": "",
+        "education": "",
+        "experience": ""
+    }
+
+    text = resume_text.lower()
+
+    # Skill extraction
+    if "python" in text:
+        profile["skills"].append("Python")
+    if "linux" in text:
+        profile["skills"].append("Linux")
+    if "network" in text:
+        profile["skills"].append("Networking")
+    if "sql" in text:
+        profile["skills"].append("SQL")
+    if "html" in text:
+        profile["skills"].append("HTML")
+    if "javascript" in text:
+        profile["skills"].append("JavaScript")
+
+    # Interest detection
+    if "cyber" in text or "security" in text:
+        profile["interest"] = "Cybersecurity"
+    elif "data" in text:
+        profile["interest"] = "Data"
+    elif "web" in text:
+        profile["interest"] = "Web Development"
+    else:
+        profile["interest"] = "General IT"
+
+    # Education
+    if "btech" in text:
+        profile["education"] = "BTech"
+    elif "student" in text:
+        profile["education"] = "Student"
+    else:
+        profile["education"] = "Unknown"
+
+    # Experience
+    if "intern" in text:
+        profile["experience"] = "Intern"
+    else:
+        profile["experience"] = "Beginner"
+
+    return profile
+
+
+# -------------------------------
+# Career Decision Agent
+# -------------------------------
+def career_decision_agent(profile):
+    """
+    Chooses best career based on skill match
+    """
+
+    ROLES = {
+        "Cybersecurity Analyst": ["Linux", "Networking", "Python"],
+        "Data Analyst": ["Python", "SQL"],
+        "Web Developer": ["HTML", "JavaScript"]
+    }
+
+    user_skills = set(profile["skills"])
+    scores = {}
+
+    for role, skills in ROLES.items():
+        match = len(user_skills.intersection(skills)) / len(skills)
+        scores[role] = round(match * 100, 2)
+
+    best_role = max(scores, key=scores.get)
+    missing_skills = list(set(ROLES[best_role]) - user_skills)
+
+    return best_role, scores, missing_skills
+
+
+# -------------------------------
+# Roadmap Planner Agent
+# -------------------------------
+def roadmap_planner(role, missing_skills):
+    """
+    Creates a simple learning roadmap
+    """
+
+    if missing_skills:
+        skill = missing_skills[0]
+    else:
+        skill = "Advanced Concepts"
+
+    roadmap = f"""
+    📌 Career Roadmap: {role}
+
+    Week 1: Learn basics of {skill}
+    Week 2: Practice {skill} with hands-on labs
+    Week 3: Build a small project
+    Week 4: Improve resume and LinkedIn
+    Week 5: Mock interviews
+    Week 6: Apply for jobs/internships
+    """
+
+    return roadmap
+
+
+# -------------------------------
+# Feedback / Learning Agent
+# -------------------------------
+def feedback_agent(feedback, roadmap):
+    """
+    Updates roadmap based on feedback
+    """
+
+    if feedback == "Rejected":
+        roadmap += "\n\n❌ Feedback received: Rejected"
+        roadmap += "\n🔁 Update: Add one more project and improve resume keywords."
+
+    elif feedback == "Interview":
+        roadmap += "\n\n🎯 Feedback received: Interview"
+        roadmap += "\n🔁 Update: Focus on interview questions and fundamentals."
+
+    return roadmap

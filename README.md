@@ -44,6 +44,24 @@ The agents work together to simulate a real career mentor.
 - **Agent-based architecture**
 - Optional **OpenAI integration** (if API key is provided)
 
+## 🚀 Demo Screenshots
+
+### Resume Input & Profile Extraction
+![Resume Analysis](screenshots/Screenshot%202025-12-30%20194137.png)
+
+### Career Recommendation & Match Scores
+![Career Recommendation](screenshots/Screenshot%202025-12-30%20194243.png)
+
+### Career Readiness Score
+![Career Readiness](screenshots/Screenshot%202025-12-30%20194259.png)
+
+### Missing Skills & Roadmap
+![Career Roadmap](screenshots/Screenshot%202025-12-30%20194316.png)
+
+### Feedback & Final Output
+![Feedback](screenshots/Screenshot%202025-12-30%20194338.png)
+  
+
 ## ▶️ How to Run the Project
 
 1. Install dependencies:
